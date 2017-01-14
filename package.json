@@ -1,0 +1,18 @@
+{
+  "name": "twitch-channels",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "browser-sync start --server --files \".\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.1",
+    "angular-route": "^1.6.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.6"
+  }
+}
