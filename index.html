@@ -11,10 +11,18 @@
   </head>
   <body ng-controller="MainCtrl">
     <div class="container">
+      <div class="heading">
+        Twitch Streams
+      </div>
       <div ng-class="{online: (channel.stream), offline: (!channel.stream), error: (info[$index].error)}" ng-repeat="channel in data" class="data">
-        <div class="info" ng-show="!info[$index].error">
+        <span ng-show="!info[$index].error">
           <img ng-src={{info[$index].logo}} alt="Avatar">
-          <a ng-href="https://www.twitch.tv/{{info[$index].name}}"> {{info[$index].display_name}} </a>
+        </span>
+
+        <div class="info" ng-show="!info[$index].error">          
+          <strong>
+            <a ng-href="https://www.twitch.tv/{{info[$index].name}}"> {{info[$index].display_name}} </a>
+          </strong>
         </div>
 
         <div ng-show="!info[$index].error">

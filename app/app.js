@@ -1,7 +1,7 @@
 var app = angular.module('twitchChannels', [])
 
 app.controller('MainCtrl', ['$scope', 'apiFactory', function ($scope, apiFactory) {
-  $scope.channels = ['ESL_SC2', 'OgamingSC2', 'cretetion', 'freecodecamp', 'storbeck', 'habathcx', 'RobotCaleb', 'noobs2ninjas', 'comster404']
+  $scope.channels = ['ESL_SC2', 'OgamingSC2', 'freecodecamp', 'comster404']
 
   $scope.data = []
   apiFactory.getStreams($scope.channels)
