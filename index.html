@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="twitchChannels">
   <head>
     <title>Twitch Channels</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="style.css" rel="stylesheet">
+    <link href="app/style.css" rel="stylesheet">
     <script src="node_modules\angular\angular.min.js"></script>
     <script src="node_modules\angular-route\angular-route.min.js"></script>
+    <script src="app/app.js"></script>
   </head>
-  <body>
-
+  <body ng-controller="MainCtrl">
+    <div>
+      <div ng-repeat="channel in data">
+        <a ng-href="https://www.twitch.tv/{{channel.name}}"> {{channel.name}} </a>
+      </div>
+    </div>
   </body>
 </html>
