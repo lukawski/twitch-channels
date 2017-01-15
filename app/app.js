@@ -1,13 +1,18 @@
 var app = angular.module('twitchChannels', [])
 
 app.controller('MainCtrl', ['$scope', 'apiFactory', function ($scope, apiFactory) {
-  var channels = ['ESL_SC2', 'OgamingSC2', 'cretetion', 'freecodecamp', 'storbeck', 'habathcx', 'RobotCaleb', 'noobs2ninjas', 'comster404']
+  $scope.channels = ['ESL_SC2', 'OgamingSC2', 'cretetion', 'freecodecamp', 'storbeck', 'habathcx', 'RobotCaleb', 'noobs2ninjas', 'comster404']
 
   $scope.data = []
-
-  apiFactory.getStreams(channels)
+  apiFactory.getStreams($scope.channels)
                 .then(function (res) {
                   $scope.data = res
+                  console.log(res)
+                })
+  apiFactory.getChannels($scope.channels)
+                .then(function (res) {
+                  $scope.info = res
+                  console.log(res)
                 })
 }])
 
@@ -21,13 +26,23 @@ app.factory('apiFactory', ['$http', 'API_URL', '$q', function ($http, API_URL, $
   }
 
   var getChannel = function (channel) {
-    return $http.get(API_URL + 'channels/' + channel)
-          .then(success, error)
+    return $http.get(API_URL + 'channels/' + channel).then(success, error)
   }
 
+  var getChannels = function (channels) {
+    var promises = []
+
+
+    channels.forEach(function (v) {
+      promises.push(getChannel(v))
+    })
+
+    return $q.all(promises).then(function (res) { return res })
+  }
+
+
   var getStream = function (channel) {
-    return $http.get(API_URL + 'streams/' + channel)
-          .then(success, error)
+    return $http.get(API_URL + 'streams/' + channel).then(success, error)
   }
 
   var getStreams = function (channels) {
@@ -37,12 +52,13 @@ app.factory('apiFactory', ['$http', 'API_URL', '$q', function ($http, API_URL, $
       promises.push(getStream(v))
     })
 
-    return $q.all(promises, success, error)
+
+    return $q.all(promises).then(function (res) { return res })
   }
 
   return {
-    getStream: getStream,
-    getStreams: getStreams
+    getStreams: getStreams,
+    getChannels: getChannels
   }
 }])
 

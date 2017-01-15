@@ -10,9 +10,21 @@
     <script src="app/app.js"></script>
   </head>
   <body ng-controller="MainCtrl">
-    <div>
-      <div ng-repeat="channel in data">
-        <a ng-href="https://www.twitch.tv/{{channel.name}}"> {{channel.name}} </a>
+    <div class="container">
+      <div ng-class="{online: (channel.stream), offline: (!channel.stream), error: (info[$index].error)}" ng-repeat="channel in data" class="data">
+        <div class="info" ng-show="!info[$index].error">
+          <img ng-src={{info[$index].logo}} alt="Avatar">
+          <a ng-href="https://www.twitch.tv/{{info[$index].name}}"> {{info[$index].display_name}} </a>
+        </div>
+
+        <div ng-show="!info[$index].error">
+          <span ng-show="(channel.stream)">{{channel.stream.channel.game}}: {{channel.stream.channel.status}}</span>
+          <span ng-show="!(channel.stream)"> Offline </span>
+        </div>
+
+        <div class="not-found" ng-show="info[$index].error">
+          {{info[$index].message}}
+        </div>
       </div>
     </div>
   </body>

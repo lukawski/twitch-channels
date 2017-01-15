@@ -1,0 +1,32 @@
+.container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.data {
+  display: flex;
+  padding: 20px;
+}
+
+.online {
+  background: darkseagreen;
+}
+
+.offline {
+  background: palevioletred
+}
+
+.error {
+  background: slategrey;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  border-radius: 100%;
+  width: 50px;
+  height: auto;
+  border: 2px solid white;
+}
